@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (utm_content) requestBody.utm_content = utm_content;
 
         try {
-            const response = await fetch(`/urls`, {
+            const response = await fetch(`${API_URL}/urls`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
