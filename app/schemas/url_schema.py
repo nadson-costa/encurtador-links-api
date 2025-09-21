@@ -3,6 +3,11 @@ from datetime import datetime
 
 class URLCreate(BaseModel):
     original_url: HttpUrl
+    utm_source: str | None = None
+    utm_medium: str | None = None
+    utm_campaign: str | None = None
+    utm_term: str | None = None
+    utm_content: str | None = None
 
 class URLResponse(BaseModel):
     original_url: HttpUrl
