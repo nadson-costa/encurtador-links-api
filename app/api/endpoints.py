@@ -16,7 +16,7 @@ def create_url(url: url_schema.URLCreate, request: Request, db: Session = Depend
     db_url = shortener.create_short_url(db = db, url=url)
     
     response_data  = url_schema.URLInfo(
-        original_url = str(db_url.original_url),
+        original_url = db_url.original_url,
         short_code = db_url.short_code,
         created_at = db_url.created_at,
         short_url = f"{str(request.base_url)}{db_url.short_code}"
