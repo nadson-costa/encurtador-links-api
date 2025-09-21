@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const API_URL = 'https://encurtador.nadson.dev'; 
+    const API_URL = 'https://encurtador.teste-app.com.br'; 
 
     const urlForm = document.getElementById('url-form');
     const submitButton = document.getElementById('submit-button');
