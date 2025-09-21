@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.schemas.url import URLCreate
+from app.schemas.url_schema import URLCreate
 from app.models.url import URL
 from math import remainder
 

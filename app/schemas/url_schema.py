@@ -12,6 +12,7 @@ class URLInfo(BaseModel):
     original_url: HttpUrl
     short_code: str
     created_at: datetime
+    short_url: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
