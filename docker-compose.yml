@@ -17,8 +17,9 @@ services:
     build: .
     container_name: url_shortener_api
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-    env_file:
-      - ./.env
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/url_shortener_db
+      - SAFE_BROWSING_API_KEY=AIzaSyB7aECXfZMm8G-b2Sx7J3DsXNMhyclOZ5s
     ports:
       - "8002:8000"
     depends_on:
