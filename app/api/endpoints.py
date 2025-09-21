@@ -1,3 +1,6 @@
+import qrcode
+from io import BytesIO
+from fastapi.responses import StreamingResponse
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
@@ -32,3 +35,19 @@ def redirect_to_url(short_code: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="URL não encontrada")
     
     return RedirectResponse(url=db_url.original_url, status_code=307)
+
+@router.get("/{short_code}/qrcode", tags=["QR Code"])
+def generate_qr_code(short_code: str, request: Request, db: Session = Depends(get_db)):
+    db_url = shortener.get_url_by_short_code(db=db, short_code=short_code)
+    if db_url is None:
+        raise HTTPException(status_code=404, detail="URL não encontrada")
+    
+    short_url = f"{str(request.base_url)}{db_url.short_code}"
+
+    img = qrcode.make(short_url)
+
+    buffer = BytesIO()
+    img.save(buffer, "PNG")
+    buffer.seek(0)
+
+    return StreamingResponse(buffer, media_type="image/png")
