@@ -16,8 +16,8 @@ def to_base62(number: int) -> str:
     
     return "".join(reversed(result))
     
-def create_short_url(db: Session, url_schema: url_schema.URLCreate) -> url_model.URL:
-    db_url = url_model.URL (original_url = str(url_schema.original_url))
+def create_short_url(db: Session, url_data: url_schema.URLCreate) -> url_model.URL:
+    db_url = url_model.URL(original_url=str(url_data.original_url))
     db.add(db_url)
     db.commit()
     db.refresh(db_url)
