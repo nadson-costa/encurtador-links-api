@@ -11,12 +11,12 @@ from app.database import get_db
 router = APIRouter()
 
 @router.post("/urls", tags=["Encurtar de URL"], response_model=url_schema.URLInfo, status_code=201)
-def create_url(url: url_schema.URLCreate, request: Request, db: Session = Depends(get_db)):
+async def create_url(url: url_schema.URLCreate, request: Request, db: Session = Depends(get_db)):
     base_url = str(request.base_url)
     if base_url in str(url.original_url):
         raise HTTPException(status_code=400, detail="Não foi possível encurtar esta URL através deste domínio")
     
-    db_url = shortener.create_short_url(db = db, url_data=url)
+    db_url = await shortener.create_short_url(db = db, url_data=url)
     
     response_data  = url_schema.URLInfo(
         original_url = db_url.original_url,
