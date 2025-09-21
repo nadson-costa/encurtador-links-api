@@ -30,6 +30,6 @@ def create_short_url(db: Session, url_schema: url_schema.URLCreate) -> url_model
 
     return db_url
 
-def get_url_by_short_code(db: Session, short_code: str) -> URL | None:
-    return db.query(URL).filter(URL.short_code == short_code).first()
+def get_url_by_short_code(db: Session, short_code: str) -> url_model.URL | None:
+    return db.query(url_model.URL).filter(url_model.URL.short_code == short_code).first()
     
