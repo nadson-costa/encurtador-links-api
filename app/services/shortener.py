@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from app.schemas.url_schema import URLCreate
-from app.models.url import URL
+from app.schemas import url_schema
+from app.models import url as url_model
 from math import remainder
 
 BASE62_CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -13,10 +13,11 @@ def to_base62(number: int) -> str:
     while number > 0:
         number, remainder = divmod(number, 62)
         result.append(BASE62_CHARS[remainder])
-        return "".join(reversed(result))
     
-def create_short_url(db: Session, url: URLCreate) -> URL:
-    db_url = URL(original_url = str(URL.original_url))
+    return "".join(reversed(result))
+    
+def create_short_url(db: Session, url_schema: url_schema.URLCreate) -> url_model.URL:
+    db_url = url_model.URL (original_url = str(url_schema.original_url))
     db.add(db_url)
     db.commit()
     db.refresh(db_url)
