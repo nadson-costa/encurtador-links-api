@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encurtador de URL</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <main>
+        <h1>🔗 Encurtador de URL</h1>
+        <p>Cole sua URL longa abaixo para gerar um link curto, com UTMs e QR Code.</p>
+
+        <form id="url-form">
+            <input type="url" id="original-url" placeholder="https://sua-url-longa-aqui.com/..." required>
+            
+            <details>
+                <summary>Parâmetros UTM (Opcional)</summary>
+                <div class="utm-grid">
+                    <input type="text" id="utm-source" placeholder="utm_source">
+                    <input type="text" id="utm-medium" placeholder="utm_medium">
+                    <input type="text" id="utm-campaign" placeholder="utm_campaign">
+                    <input type="text" id="utm-term" placeholder="utm_term">
+                    <input type="text" id="utm-content" placeholder="utm_content">
+                </div>
+            </details>
+            
+            <button type="submit" id="submit-button">
+                <span class="button-text">Encurtar URL</span>
+                <div class="spinner hidden"></div>
+            </button>
+        </form>
+
+        <section id="result-section" class="hidden">
+            <h2>Seu Link foi Gerado!</h2>
+            <div class="result-box">
+                <p><strong>Link Curto:</strong></p>
+                <div class="short-url-container">
+                    <a href="#" id="short-url-link" target="_blank"></a>
+                    <button id="copy-button" title="Copiar para a área de transferência">Copiar</button>
+                </div>
+                <p><strong>QR Code:</strong></p>
+                <img id="qr-code-img" src="" alt="QR Code para a URL encurtada">
+            </div>
+        </section>
+
+        <div id="error-section" class="hidden">
+            <p id="error-message"></p>
+        </div>
+    </main>
+
+</body>
+</html>
