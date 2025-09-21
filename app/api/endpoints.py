@@ -13,7 +13,7 @@ def create_url(url: url_schema.URLCreate, request: Request, db: Session = Depend
     if base_url in str(url.original_url):
         raise HTTPException(status_code=400, detail="Não foi possível encurtar esta URL através deste domínio")
     
-    db_url = shortener.create_short_url(db = db, url=url)
+    db_url = shortener.create_short_url(db = db, url_data=url)
     
     response_data  = url_schema.URLInfo(
         original_url = db_url.original_url,
