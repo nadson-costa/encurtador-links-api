@@ -4,19 +4,22 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException
 from app.schemas import url_schema
 from app.models import url as url_model
-from math import remainder
 from app.core.config import settings
 
-BASE62_CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_"
 
-def to_base62(number: int) -> str:
+ID_OFFSET = 4096
+
+
+def encode_id(number: int) -> str:
+    base = len(ALPHABET)
     if number == 0:
-        return BASE62_CHARS[0]
+        return ALPHABET[0]
     result = []
 
     while number > 0:
-        number, remainder = divmod(number, 62)
-        result.append(BASE62_CHARS[remainder])
+        number, remainder = divmod(number, base)
+        result.append(ALPHABET[remainder])
     
     return "".join(reversed(result))
 
@@ -39,7 +42,7 @@ async def check_url_safety(url_to_check: str):
             response.raise_for_status() 
             
             if response.json().get("matches"):
-                raise HTTPException(status_code=400, detail="Detectamos que a URL não é segura. Logo, não é possível encurtar")
+                raise HTTPException(status_code=400, detail="A URL fornecida foi sinalizada como insegura pelo Google Safe Browsing e não pode ser encurtada.")
 
         except httpx.RequestError as exc:
             print(f"Ocorreu um erro enquanto processavamos {exc.request.url!r}.")
@@ -78,7 +81,8 @@ async def create_short_url(db: Session, url_data: url_schema.URLCreate) -> url_m
     db.commit()
     db.refresh(db_url)
 
-    short_code = to_base62(db_url.id)
+    number_to_encode = db_url.id + ID_OFFSET
+    short_code = encode_id(number_to_encode)
     
     db_url.short_code = short_code
     db.commit()
