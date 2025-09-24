@@ -1,7 +1,7 @@
 # Encurtador de URLs com UTM, gerador de QR Code e validação de segurança
 
-[![Documentação](https://img.shields.io/badge/Ver_Documenta%C3%A7%C3%A3o-49CC90?style=for-the-badge&logo=docs&logoColor=white))](https://encurtador.teste-app.com.br/docs)
-[![Front-end para teste da API](https://img.shields.io/badge/Ver_Demonstração-007BFF?style=for-the-badge&logo=rocket&logoColor=white)](https://encurtador.teste-app.com.br)
+[![Documentação](https://img.shields.io/badge/Ver_Documenta%C3%A7%C3%A3o(Removido%20do%20ar%20por%20suspeita%20de%20uso%20malicioso%20por%20terceiros)-49CC90?style=for-the-badge&logo=docs&logoColor=white))](https://encurtador.teste-app.com.br/docs)
+[![Front-end para teste da API](https://img.shields.io/badge/Ver_Demonstra%C3%A7%C3%A3o(Removido%20do%20ar%20por%20suspeita%20de%20uso%20malicioso%20por%20terceiros)-007BFF?style=for-the-badge&logo=rocket&logoColor=white)](https://encurtador.teste-app.com.br)
 
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.111.0-009688?style=for-the-badge&logo=fastapi&logoColor=white)
